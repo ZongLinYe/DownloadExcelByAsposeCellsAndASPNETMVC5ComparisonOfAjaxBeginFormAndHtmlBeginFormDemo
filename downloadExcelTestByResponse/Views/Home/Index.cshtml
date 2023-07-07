@@ -1,0 +1,29 @@
+﻿
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+@using (Html.BeginForm("DownloadExcel", "Home", FormMethod.Post,new { @class= "mb-2" }))
+{
+    @Html.AntiForgeryToken()
+    <input type="submit" value="Download Excel By Html.BeginForm" />
+}
+
+<button type="button" id="btnExport">Download Excel By Ajax.BeginForm</button>
+
+@using (Ajax.BeginForm("DownloadExcel", "Home", null, new AjaxOptions { }, new { id = "frmExport" }))
+{
+    @Html.AntiForgeryToken()
+}
+@section scripts{
+    
+    <script>
+        $(function () {
+            $("#btnExport").click(function () {
+                $("#frmExport").submit();
+            });
+        });
+    </script>
+    }
